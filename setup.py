@@ -1,7 +1,7 @@
 import glob
 import os.path
-from distutils.core import setup
-__version__ = "0.0.1"
+from setuptools import setup, find_packages
+#from distutils.core import setup ,find_packages
 
 # make sure the working directory is BASE_DIR
 # BASE_DIR = os.path.dirname(__file__)
@@ -49,9 +49,11 @@ except ImportError:
 setup(
     name='unitree_legged_sdk',  # used by `pip install`
     version='0.0.1',
-    description='xxx',
+    description='test whl',
     ext_modules=ext_modules,
-    packages=['unitree_legged_sdk'], # the directory would be installed to site-packages
+    #packages=['unitree_legged_sdk'], # the directory would be installed to site-packages
+    packages=find_packages("unitree_legged_sdk"),
+    package_dir={"": "unitree_legged_sdk"},
     setup_requires=["pybind11"],
     install_requires=["pybind11"],
     python_requires='>=3.6',
