@@ -54,7 +54,7 @@ setup(
     packages=['unitree_legged_sdk'], # the directory would be installed to site-packages
     setup_requires=["pybind11"],
     install_requires=["pybind11"],
-    python_requires='>=3.8',
+    python_requires='>=3.6',
     include_package_data=True,
     zip_safe=False,
 )
