@@ -1,12 +1,13 @@
 import glob
 import os.path
-from setuptools import setup, find_packages
-#from distutils.core import setup ,find_packages
+from setuptools import setup , find_packages
+#from distutils.core import setup
 
 # make sure the working directory is BASE_DIR
 # BASE_DIR = os.path.dirname(__file__)
 # os.chdir(BASE_DIR)
 
+__version__ = "0.0.1"
 ext_modules = []
 
 try:
