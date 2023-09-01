@@ -74,9 +74,12 @@ jobs:
       with:
         python-version: '3.x'
 
+    - name: install package
+      run: apt-get install libboost-all-dev
+      shell: bash
+
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.15.0
-      run: apt-get install libboost-all-dev
       env:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}
         CIBW_BUILD: ${{ matrix.build }}
