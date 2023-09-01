@@ -109,8 +109,8 @@ class CMakeBuild(build_ext):
         )
 
 
-if sys.version_info < (3, 0) or sys.version_info > (3, 11):
-    sys.exit("Sorry, Python < 3.0 or >3.11 is not supported")
+if sys.version_info < (3, 0):
+    sys.exit("Sorry, Python < 3.0 is not supported")
 
 requirements = ["pybind11", "auditwheel ", "twine", "wheel", "setuptools "]
 
