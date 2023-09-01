@@ -86,7 +86,9 @@ jobs:
         python-version: '3.x'
 
     - name: install package
-      run: sudo apt-get install libboost-all-dev libmsgpack*
+      run: 
+      sudo apt-get update
+      sudo apt-get install libboost-all-dev libmsgpack*
 
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.15.0
