@@ -29,7 +29,7 @@ if(PYTHON_BUILD)
 endif()
 
 set(EXTRA_LIBS -pthread libunitree_legged_sdk.a)
-set(CMAKE_CXX_FLAGS "-O3 -fPIC")
+set(CMAKE_CXX_FLAGS "-O3 -fPIC -no-pie")
 set(CMAKE_CXX_STANDARD 14)
 
 
