@@ -43,6 +43,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         path: dist/*.tar.gz
+
   build_wheels:
     name: ${{ matrix.arch }} ${{ matrix.build }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -93,7 +94,6 @@ jobs:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}
         CIBW_BUILD: ${{ matrix.build }}
         CIBW_BUILD_VERBOSITY: 1
-        CIBW_ENVIRONMENT: CIBW_BUILD_VERBOSITY=1
         
 
     - name: Show files
