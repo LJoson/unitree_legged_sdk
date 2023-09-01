@@ -1,5 +1,0 @@
-pybind11
-auditwheel
-twine
-wheel
-setuptools
