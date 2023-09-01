@@ -86,7 +86,7 @@ jobs:
         python-version: '3.x'
 
     - name: install package
-      run: apt-get install libboost-all-dev
+      run: sudo apt-get install libboost-all-dev
       shell: bash
 
     - name: Build wheels
