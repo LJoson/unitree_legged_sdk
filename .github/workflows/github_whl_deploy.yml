@@ -86,7 +86,7 @@ jobs:
         python-version: '3.x'
 
     - name: install package
-      run: 
+      run: |
       sudo apt-get update
       sudo apt-get install libboost-all-dev libmsgpack*
 
