@@ -1,23 +1,9 @@
 name: Build and upload wheel to PyPI
 
 on:
-  schedule:
-    #        ┌───────────── minute (0 - 59)
-    #        │  ┌───────────── hour (0 - 23)
-    #        │  │ ┌───────────── day of the month (1 - 31)
-    #        │  │ │ ┌───────────── month (1 - 12 or JAN-DEC)
-    #        │  │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
-    #        │  │ │ │ │
-    - cron: "42 2 * * SUN,WED"
-  workflow_dispatch:
-  pull_request:
   push:
-    branches:
-      - main
-  release:
-    types:
-      - published
-
+    tags:
+      - '*'
 jobs:
   build_sdist:
     name: Build SDist
@@ -90,6 +76,7 @@ jobs:
 
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.15.0
+      run: apt-get install libboost-all-dev
       env:
         CIBW_ARCHS_LINUX: ${{ matrix.arch }}
         CIBW_BUILD: ${{ matrix.build }}
@@ -110,30 +97,27 @@ jobs:
         path: wheelhouse/*.whl
 
   upload_pypi:
+
+    permissions:
+      contents: none
+    name: Upload
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
-    if: github.event_name == 'release' && github.event.action == 'published'
-    # or, alternatively, upload to PyPI on every tag starting with 'v' (remove on: release above to use this)
-    # if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
     steps:
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
 
-      - uses: actions/download-artifact@v3
-        with:
-          # unpacks default artifact into dist/
-          # if `name: artifact` is omitted, the action will create extra parent dir
-          name: artifact
-          path: dist
+    - uses: actions/download-artifact@v3
+      with:
+        name: artifact
+        path: dist
 
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          # To test: repository_url: https://test.pypi.org/legacy/
+    - uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
+        # To test: repository_url: https://test.pypi.org/legacy/
 
 
