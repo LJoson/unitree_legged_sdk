@@ -12,7 +12,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <vector>
-//#include <msgpack.hpp>
+#include <msgpack.hpp>
 
 using namespace UNITREE_LEGGED_SDK;
 
