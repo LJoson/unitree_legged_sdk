@@ -5,8 +5,7 @@ import time
 import math
 import numpy as np
 
-sys.path.append('../lib/python/amd64')
-import robot_interface as sdk
+import unitree_legged_sdk.robot_interface as sdk
 
 def jointLinearInterpolation(initPos, targetPos, rate):
 
