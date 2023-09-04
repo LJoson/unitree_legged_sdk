@@ -65,11 +65,6 @@ jobs:
       with:
         python-version: '<3.11'
 
-    - name: install package
-      run: |
-        . /etc/os-release
-        sudo apt-get update
-        sudo apt-get -y install libboost-all-dev libmsgpack*
 
     - name: Build wheels
       uses: pypa/cibuildwheel@v2.15.0
