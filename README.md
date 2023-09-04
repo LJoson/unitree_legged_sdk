@@ -39,7 +39,6 @@ Run examples with 'sudo' for memory locking.
 
 #### Python
 
-# unitree_legged_sdk
 python wrapper of unitree_legged_sdk with [pybind11](https://github.com/pybind/pybind11), only support python3.x now.
 
 
