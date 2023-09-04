@@ -8,7 +8,7 @@
 #include "comm.h"
 #include "safety.h"
 #include "udp.h"
-//#include "loop.h"
+#include "loop.h"
 #include "quadruped.h"
 #include "joystick.h"
 //#include <boost/bind.hpp>

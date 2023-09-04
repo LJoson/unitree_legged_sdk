@@ -2,9 +2,9 @@ if(NOT DEFINED unitree_legged_sdk_VERSION)
     string(TIMESTAMP unitree_legged_sdk_VERSION "%Y%m%d")
 endif()
 
-set(unitree_legged_sdk_VERSION_MAJOR 1)
-set(unitree_legged_sdk_VERSION_MINOR 0)
-set(unitree_legged_sdk_VERSION_PATCH ${unitree_legged_sdk_VERSION})
+set(unitree_legged_sdk_VERSION_MAJOR 3)
+set(unitree_legged_sdk_VERSION_MINOR 8)
+set(unitree_legged_sdk_VERSION_PATCH 6.${unitree_legged_sdk_VERSION})
 set(unitree_legged_sdk_VERSION_STRING ${unitree_legged_sdk_VERSION_MAJOR}.${unitree_legged_sdk_VERSION_MINOR}.${unitree_legged_sdk_VERSION_PATCH})
 message(STATUS "unitree_legged_sdk_VERSION_STRING = ${unitree_legged_sdk_VERSION_STRING}")
 

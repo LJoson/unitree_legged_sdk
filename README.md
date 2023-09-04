@@ -38,5 +38,9 @@ cmake -DPYTHON_BUILD=TRUE ..
 Run examples with 'sudo' for memory locking.
 
 #### Python
-##### arm
-change `sys.path.append('../lib/python/amd64')` to `sys.path.append('../lib/python/arm64')`
+
+# unitree_legged_sdk
+python wrapper of unitree_legged_sdk with [pybind11](https://github.com/pybind/pybind11), only support python3.x now.
+
+
+More you can see [python_wrapper](./python_wrapper/README.md)
