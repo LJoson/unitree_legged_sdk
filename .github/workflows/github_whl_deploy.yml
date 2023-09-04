@@ -52,9 +52,6 @@ jobs:
           - { os: ubuntu-20.04, arch: x86_64,     build: 'cp*-manylinux*' }
           - { os: ubuntu-20.04, arch: x86_64,     build: 'cp*-musllinux*' }
           - { os: ubuntu-20.04, arch: x86_64,     build: 'pp*'            }
-          - { os: ubuntu-20.04, arch: aarch64,       build: 'cp*'         }
-          - { os: ubuntu-20.04, arch: aarch64,       build: 'pp*'         }
-
 
     steps:
     - uses: actions/checkout@v3
@@ -87,6 +84,60 @@ jobs:
       with:
         path: wheelhouse/*.whl
 
+build_wheels_qemu:
+    name: ${{ matrix.arch }} ${{ matrix.build }}
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [aarch64,]
+        build: ['cp36-*', 'cp37-*', 'cp38-*', 'cp39-*', 'cp310-*', 'cp311-*', 'cp312-*']
+        include:
+          - arch: aarch64
+            build: 'pp37-*'
+          - arch: aarch64
+            build: 'pp38-*'
+          - arch: aarch64
+            build: 'pp39-*'
+          - arch: aarch64
+            build: 'pp310-*'
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: all
+
+    - name: Build wheels
+      uses: pypa/cibuildwheel@v2.15.0
+      env:
+        CIBW_ARCHS_LINUX: ${{ matrix.arch }}
+        CIBW_BUILD: ${{ matrix.build }}
+        CIBW_BUILD_VERBOSITY: 1
+        CIBW_ENVIRONMENT: CMAKE_BUILD_PARALLEL_LEVEL=2
+
+    - name: Show files
+      run: ls -lh wheelhouse
+      shell: bash
+
+    - name: Verify clean directory
+      run: git diff --exit-code
+      shell: bash
+
+    - name: Upload wheels
+      uses: actions/upload-artifact@v3
+      with:
+        path: wheelhouse/*.whl
+        
   upload_pypi:
     permissions:
       contents: none
